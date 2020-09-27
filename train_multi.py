@@ -9,7 +9,7 @@ from keras.metrics import categorical_crossentropy
 #os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 
-def train(model, image_folder, label_folder, n_class, batch_size=2, epochs=20, weights_path=None):
+def train(model, image_folder, label_folder, n_class, batch_size=16, epochs=20, weights_path=None):
     # model：传入模型
     # image_folder：图像文件夹
     # label_folder：分割数据文件夹
@@ -27,7 +27,7 @@ def train(model, image_folder, label_folder, n_class, batch_size=2, epochs=20, w
 
    # model.fit_generator(train_gen, 200, epochs=epochs)
     checkpointer = ModelCheckpoint(filepath="weight.h5", monitor='loss', verbose=1, save_best_only=True, save_weights_only=True)
-    model.fit_generator(train_gen, 100, epochs=epochs, callbacks=[checkpointer])
+    model.fit_generator(train_gen, 62500, epochs=epochs, callbacks=[checkpointer])
 
 def save_model(model, model_path_last, model1_path):
     model.save_weights(model_path_last)
@@ -39,8 +39,8 @@ if __name__ == "__main__":
     weights_path_last = "weight_last.h5"
     weights_path="weight.h5"
     model1_path="model.h5"
-    image_folder = "D:\\python file\\AI Remote Sensing Image\\baseline\\train\\images/"
-    label_folder = "D:\\python file\\AI Remote Sensing Image\\baseline\\train\\labels/"
+    image_folder = "train/images/"
+    label_folder = "train/labels/"
     n_class = 8
 
     model = multi_res_u_net()
