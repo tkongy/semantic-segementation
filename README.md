@@ -14,4 +14,6 @@ Remote sensing image semantic segmentation tf2-multiresunet
 (2)./test/labels存放人工标记
 
 weight.h5用来保存训练的网络权重
+#update
+增加了cbam模块
 
